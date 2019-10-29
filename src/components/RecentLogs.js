@@ -2,17 +2,22 @@ import React from 'react';
 
 export default props => {
   let { onClickHandler, logs } = props;
-  return logs.map(val => {
-    return (
-      <div
-        style={{ border: '1px solid black' }}
-        onClick={() => {
-          onClickHandler(val);
-        }}
-      >
-        <p>Value:{val.value}</p>
-        <p>Time:{val.time}</p>
-      </div>
-    );
-  });
+
+  return (
+    <>
+      <h3>Recent Logs</h3>
+      {logs.map(val => (
+        <div
+          className='logsborder'
+          onClick={() => {
+            onClickHandler(val);
+          }}
+          key={val.id}
+        >
+          <p>Value:{val.value}</p>
+          <p>Time:{val.time}</p>
+        </div>
+      ))}
+    </>
+  );
 };
