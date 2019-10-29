@@ -1,9 +1,8 @@
 import React from 'react';
 
 export default props => {
-  let { onClickHandler } = props;
-  const details = JSON.parse(localStorage.getItem('details'));
-  return details.map(val => {
+  let { onClickHandler, logs } = props;
+  return logs.map(val => {
     return (
       <div
         style={{ border: '1px solid black' }}

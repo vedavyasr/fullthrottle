@@ -7,6 +7,7 @@ export default () => {
   const [time, setTime] = useState(6);
   const [interestRate, setinterestRate] = useState(0);
   const [monthlyPayment, setmonthlyPayment] = useState(0);
+  const [logs, setLogs] = useState([]);
   const onClickHandler = val => {
     setTime(val.time);
     setValue(val.value);
@@ -20,21 +21,21 @@ export default () => {
         setinterestRate(res.data.interestRate);
         setmonthlyPayment(res.data.monthlyPayment.amount);
         let details = JSON.parse(localStorage.getItem('details'));
-
         details.push({
           value,
           time,
           interestRate: res.data.interestRate,
           amount: res.data.monthlyPayment.amount
         });
-        console.log(details);
+        setLogs(details);
         localStorage.setItem('details', JSON.stringify(details));
       })
       .catch(err => console.log(err));
   };
   useEffect(() => {
     let localStore = JSON.parse(localStorage.getItem('initialLoan'));
-    localStorage.setItem('details', JSON.stringify([]));
+    !localStorage.getItem('details') &&
+      localStorage.setItem('details', JSON.stringify([]));
     function setValues() {
       setValue(localStore.value);
       setTime(localStore.time);
@@ -81,7 +82,7 @@ export default () => {
         onChange={e => setTime(e.target.value)}
         onBlur={() => apiCallHandler()}
       />
-      <RecentLogs onClickHandler={onClickHandler} />
+      <RecentLogs logs={logs} onClickHandler={onClickHandler} />
     </>
   );
 };
