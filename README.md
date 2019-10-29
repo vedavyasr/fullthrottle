@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The project was aimed to create a Loan Calculator
+
+have used the provided api to calculate the loan details for specific amount and time.
 
 ## Available Scripts
 
